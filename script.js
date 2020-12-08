@@ -1,61 +1,92 @@
 // Assignment Code
-let generateBtn = document.querySelector('#generate');
-let yesLowerCase = document.getElementById('#lowerCase');
-let yesUpperCase = document.getElementById('#upperCase');
-let yesNumeric = document.getElementById('#numeric');
-let yesSpecialChar = document.getElementById('#specialChar');
-let errorMessage = document.getElementById('#errorMsg')
+let generateBtn = document.getElementById('generate');
+let yesLowerCase = document.getElementById('lowerCase');
+let yesUpperCase = document.getElementById('upperCase');
+let yesNumeric = document.getElementById('numeric');
+let yesSpecialChar = document.getElementById('specialChar');
+let errorMsgOptions = document.getElementById('errorMsgOptions');
+let errorMsgLen = document.getElementById('errorMsgLen');
+let passInput = document.getElementById('password');
 let passwordOptions = '';
 
 // data
-let lettersLower = 'a b c d e f g h i j k l m n o p q r s t u v w x y z';
-let lettersUpper = 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z';
-let numericChar = '1 2 3 4 5 6 7 8 9 0';
-let specChar =  '! @ # $ %  ^ & * ( ) - = _ + < > ? / : ; ';
+let lettersLower = 'abcdefghijklmnopqrstuvwxyz';
+let lettersUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let numericChar = '1234567890';
+let specChar =  '!@#$%^&*()-=_+<>?/:;';
 
-// call password function
-generateBtn.addEventListener ('click', writePassword());
+function getuserlenInput(passLen) {
+  return passLen.value;
+}
 
 // Get options 
-
 function getOptions(){
   if (!yesLowerCase.checked && !yesUpperCase.checked && !yesNumeric.checked && !yesSpecialChar.checked){
-    errorMessage = "You must select at least one option";
+    errorMsgOptions.setAttribute('aria-hidden', false);
+    errorMsgOptions.textContent = 'You must select at least one option';
+  }
+  if (!passLen.value) {
+    errorMsgLen.setAttribute('aria-hidden', false);
+    errorMsgLen.textContent = 'You must select a length.';
+    
+  }else {
+    errorMsgLen.setAttribute('aria-hidden', true);
+    errorMsgLen.textContent = '';
+    
   }
   if (yesLowerCase.checked) {
     passwordOptions += lettersLower;
+    errorMsgOptions.setAttribute('aria-hidden', true);
+    errorMsgOptions.textContent = '';
   }
+  
   if (yesUpperCase.checked) {
     passwordOptions += lettersUpper;
+    errorMsgOptions.setAttribute('aria-hidden', true);
+    errorMsgOptions.textContent = '';
   }
+    
+  
   if (yesNumeric.checked) {
     passwordOptions += numericChar;
+    errorMsgOptions.setAttribute('aria-hidden', true);
+    errorMsgOptions.textContent = '';
   }
   if (yesSpecialChar.checked) {
-    passwordOptions +=specChar;
+    passwordOptions += specChar;
+    errorMsgOptions.setAttribute('aria-hidden', true);
+    errorMsgOptions.textContent = '';
   }
+  
   return passwordOptions;
+  
 }
 
-function buildPassword(length) {
+
+// Call getOtions and pass in the options that the user selected. 
+// 
+function startPass(length) {
 	let passString = getOptions();
 	let passLength = passString.length;
 
-	let result = '';
-
+	let randPass = '';
+  
 	for ( let i = 0; i < length; i++ ) {
-		result += passString.charAt(Math.floor(Math.random() * passLength));
-	}
-
-	return result;
-}
-
-// make sure length is selected
-function writePassword() {
-  if (!passwordLength) {
-    errorMessage.innerHTML = "You must select a Password length.";
+		randPass += passString.charAt(Math.floor(Math.random() * passLength));
   }
+  
+  return randPass;
 }
+ 
+generateBtn.addEventListener('click', function(){
+  let finalPassword = startPass(getuserlenInput(passLen));
+  if (finalPassword){
+    passInput.innerHTML = finalPassword;
+    
+  }
+  
+});
+
 
 
 

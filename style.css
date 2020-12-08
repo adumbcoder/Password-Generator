@@ -39,10 +39,19 @@ div .row h2 {
   text-align: center;
   padding-bottom: 20px;
 }
-
-.rowHeight {
+/* error messages */
+.errorMsg {
+  width: 100%;
   height: 25px;
+  text-align: center;
+  background-color: red;
+  color: white;
 }
+[aria-hidden='true']{
+  display: none;
+}
+
+
 
 .card {
   background-color: hsl(0, 0%, 100%);
@@ -65,7 +74,18 @@ div .row h2 {
 }
 
 .card-body {
+  color: black;
   min-height: 100px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 85px;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px dashed #0004ff;
+  border-radius: 6px;
 
 }
 
@@ -118,19 +138,11 @@ button[disabled] {
   appearance: none;
   border: none;
   display: block;
-  width: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 85px;
-  font-size: 1.2rem;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px dashed #0004ff;
-  border-radius: 6px;
+  width: 100%;
   resize: none;
   overflow: hidden;
+  font-size: 24px;
 }
 
 @media (max-width: 690px) {
