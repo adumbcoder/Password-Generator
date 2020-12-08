@@ -1,5 +1,6 @@
 // Assignment Code
 let generateBtn = document.getElementById('generate');
+let copyBtn = document.getElementById('copyToClipboard');
 let yesLowerCase = document.getElementById('lowerCase');
 let yesUpperCase = document.getElementById('upperCase');
 let yesNumeric = document.getElementById('numeric');
@@ -90,9 +91,21 @@ generateBtn.addEventListener('click', function(){
   let finalPassword = startPass(getuserlenInput(passLen));
   if (finalPassword){
     passInput.innerHTML = finalPassword;
+    document.getElementById('confirmCopy').setAttribute('aria-hidden', true);
   }
+  
 });
 
+copyBtn.addEventListener('click', function(){
+  // Get the text to copy
+  let copyText = document.getElementById('password');
+  // Select the text
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  // Copy the text inside the text field
+  document.execCommand('copy');
+  
+});
 
 
 
